@@ -7,7 +7,7 @@ export default function TargetDogs({ dogs, titleaction, action }) {
         const { description, breed, name_dog, image, dog_id, gender } = item;
         return (
           <div
-            className="w-4/5 md:w-full flex flex-col  items-center bg-white mb-2 rounded-lg"
+            className="w-4/5 md:w-full flex flex-col  items-center bg-white mb-2 rounded-lg hover:shadow-xl hover:shadow-slate-600"
             key={dog_id}
           >
             <h3 className="text-2xl">{name_dog}</h3>
