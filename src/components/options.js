@@ -1,13 +1,10 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Options({ options, changeOptions }) {
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
-  useEffect(() => {
-    changeOptions(inputValue);
-  }, [inputValue]);
   return (
     <div>
       <Autocomplete
@@ -20,6 +17,7 @@ export default function Options({ options, changeOptions }) {
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
+          changeOptions(newInputValue);
           setInputValue(newInputValue);
         }}
         id="controllable-states-demo"

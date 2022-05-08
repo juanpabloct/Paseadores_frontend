@@ -1,6 +1,9 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import InputText from "../components/input-text";
 import InputPassword from "../components/input.password";
+import crearUsuario from "../peticiones/crear_usuario";
 import Options from "./options";
 
 export default function FormCreateUser({
@@ -23,9 +26,22 @@ export default function FormCreateUser({
   const options = ["Property Dogs", "Dog Walker"];
   const [changeOptions, setChangeOptions] = useState();
   useEffect(() => {
-    setValueInputs({ ...valueInputs, ["usePlatform"]: changeOptions });
+    setValueInputs({ ...valueInputs, usePlatform: changeOptions });
   }, [changeOptions]);
-  console.log(valueInputs);
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    const { usePlatform, name, city, place, age, email, password } =
+      valueInputs;
+    usePlatform?.length > 6 &&
+    name?.length > 8 &&
+    city?.length > 4 &&
+    place?.length > 4 &&
+    age?.length > 0 &&
+    email?.length > 8 &&
+    password?.length > 6
+      ? setDisabled(false)
+      : setDisabled(true);
+  }, [valueInputs]);
   return (
     <>
       <h4 className="text-center text-white">Use platform</h4>
@@ -33,7 +49,6 @@ export default function FormCreateUser({
       {inputs.map((input, index) => {
         const { label, subtitle, type = "text" } = input;
         const name = input.name;
-        const value = valueInputs[name];
         return (
           <InputText
             key={index}
@@ -50,11 +65,26 @@ export default function FormCreateUser({
         );
       })}
       <InputPassword
-        styleSubtitle={"text-white text-center"}
+        styleSubtitle={"text-black text-center"}
         onChange={(e) => {
           setValueInputs({ ...valueInputs, password: e.target.value });
         }}
       />
+      <div className="flex flex-col content-center items-center">
+        <Link to={""}>
+          <Button
+            variant="contained"
+            fullWidth
+            color="success"
+            onClick={() =>
+              crearUsuario(valueInputs).then((window.location.href = "./login"))
+            }
+            disabled={disabled}
+          >
+            Ingresar
+          </Button>
+        </Link>
+      </div>
     </>
   );
 }

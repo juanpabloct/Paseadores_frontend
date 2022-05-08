@@ -26,6 +26,7 @@ export default function InputPassword({
       <div className="flex flex-col relative w-full">
         <h1 className={"py-2 " + styleSubtitle}>Password</h1>
         <TextField
+          required={true}
           id="outlined-password-input"
           label="Password"
           type={showPassword}

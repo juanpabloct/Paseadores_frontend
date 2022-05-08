@@ -23,6 +23,7 @@ export default function InputText({
         size={sizeInput}
         value={value}
         onChange={onChange}
+        required={true}
       />
     </div>
   );

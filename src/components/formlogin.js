@@ -1,11 +1,25 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import Acceder from "../peticiones/acceder";
 import InputText from "./input-text";
 import InputPassword from "./input.password";
 
-export default function FormLogin() {
-  const [user, setUser] = useState([]);
+export default function FormLogin({ setValues }) {
+  const [dogs, setDogs] = useState([]);
+
+  useEffect(() => {
+    setValues(dogs);
+  }, [dogs]);
+  const [user, setUser] = useState();
+  const [login, setLogin] = useState(true);
+  const [cursorPointer, setCursorPointer] = useState("");
+  useEffect(() => {
+    user?.user?.length > 8 && user?.password?.length > 7
+      ? setLogin(false)
+      : setLogin(true);
+    !login ? setCursorPointer("cursor-pointer") : setCursorPointer("");
+  }, [user]);
   return (
     <form className="text-center grid grid-cols-1 justify-items-center">
       <div className="w-2/3 md:w-1/2">
@@ -26,14 +40,18 @@ export default function FormLogin() {
           }}
         />
       </div>
-      <div className="w-1/3 mt-3">
-        <Link to={"/index"} className="text-right cursor-pointer w-full h-full">
-          <Button variant="contained" fullWidth color="success">
-            Ingresar
-          </Button>
-        </Link>
-
-        <input type="password" />
+      <div className={"w-1/3 mt-3 " + cursorPointer}>
+        <Button
+          variant="contained"
+          fullWidth
+          color="success"
+          disabled={login}
+          onClick={async (e) => {
+            await Acceder(user, { setDogs });
+          }}
+        >
+          Ingresar
+        </Button>
       </div>
     </form>
   );
