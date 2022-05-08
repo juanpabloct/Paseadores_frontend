@@ -10,7 +10,7 @@ function Login({ setDataUser }) {
 
   useEffect(() => {
     setDataUser(value);
-    value?.response === "ok" ? navigate("/index") : navigate("/login");
+    value?.response === "ok" ? navigate("/index") : navigate("/");
   }, [value]);
   return (
     <>

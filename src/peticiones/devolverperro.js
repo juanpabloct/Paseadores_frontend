@@ -5,5 +5,4 @@ export default function devolver(id) {
     method: "POST",
     params: { body: id },
   });
-  console.log(id);
 }

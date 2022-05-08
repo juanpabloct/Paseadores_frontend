@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 export default function InputPassword({
   styleSubtitle = "text-black text-xl",
   onChange,
+  envio,
+  url,
 }) {
   const MostrarContraseña = useRef();
   const [showPassword, setShowPassword] = useState("password");
@@ -40,8 +42,8 @@ export default function InputPassword({
         >
           <RemoveRedEyeIcon ref={MostrarContraseña} />
         </div>
-        <Link to={"/createUser"} className="text-right cursor-pointer">
-          Crear Cuenta
+        <Link to={url} className="text-right cursor-pointer">
+          {envio}
         </Link>
       </div>
     </>

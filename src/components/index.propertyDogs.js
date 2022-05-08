@@ -7,7 +7,6 @@ export default function IndexPropertyDogs({ datos, dataDogs, setDataDogs }) {
   const dogs = datos[1];
   const user = datos[0].user_id;
   const [updateData, setUpdateData] = useState();
-  console.log(dogs);
   useEffect(() => {
     setDataDogs(updateData);
   }, []);

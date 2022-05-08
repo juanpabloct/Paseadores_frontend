@@ -25,6 +25,6 @@ export default function Index({ data, setDataUser }) {
       );
     }
   } catch (error) {
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 }

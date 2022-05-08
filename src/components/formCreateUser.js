@@ -33,12 +33,12 @@ export default function FormCreateUser({
     const { usePlatform, name, city, place, age, email, password } =
       valueInputs;
     usePlatform?.length > 6 &&
-    name?.length > 8 &&
+    name?.length > 4 &&
     city?.length > 4 &&
     place?.length > 4 &&
     age?.length > 0 &&
-    email?.length > 8 &&
-    password?.length > 6
+    email?.length > 4 &&
+    password?.length > 4
       ? setDisabled(false)
       : setDisabled(true);
   }, [valueInputs]);
@@ -69,6 +69,8 @@ export default function FormCreateUser({
         onChange={(e) => {
           setValueInputs({ ...valueInputs, password: e.target.value });
         }}
+        envio={"login"}
+        url={"/"}
       />
       <div className="flex flex-col content-center items-center">
         <Link to={""}>
@@ -76,8 +78,10 @@ export default function FormCreateUser({
             variant="contained"
             fullWidth
             color="success"
-            onClick={() =>
-              crearUsuario(valueInputs).then((window.location.href = "./login"))
+            onClick={async () =>
+              await crearUsuario(valueInputs).then(() => {
+                window.location.href = "/";
+              })
             }
             disabled={disabled}
           >

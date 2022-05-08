@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
 export default async function sacarPerro(dog_id) {
-  const response = await axios("http://localhost:4000/sacarPerro", {
+  await axios("http://localhost:4000/sacarPerro", {
     method: "POST",
     headers: {
       Accept: "application/json",

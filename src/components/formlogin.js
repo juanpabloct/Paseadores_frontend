@@ -38,6 +38,8 @@ export default function FormLogin({ setValues }) {
           onChange={(e) => {
             setUser({ ...user, password: e.target.value });
           }}
+          envio={"Create User"}
+          url={"/createUser"}
         />
       </div>
       <div className={"w-1/3 mt-3 " + cursorPointer}>
